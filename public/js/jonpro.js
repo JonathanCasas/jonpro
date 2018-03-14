@@ -1,5 +1,11 @@
 var jonpro = function (element) {
     this.companies = function (route) {
+        this.select2(route);
+    };
+    this.users = function (route) {
+        this.select2(route);
+    };
+    this.select2 = function (route) {
         $(element).select2({
             ajax: {
                 url: route,
@@ -19,9 +25,10 @@ var jonpro = function (element) {
             allowClear: true,
             placeholder: 'Search companies',
             minimumInputLength: 0,
+            width: '100%'
         });
-    }
-}
+    };
+};
 
 
 
@@ -31,4 +38,4 @@ var jonpro = function (element) {
  */
 var $jp = function (element) {
     return new jonpro(element);
-}
+};

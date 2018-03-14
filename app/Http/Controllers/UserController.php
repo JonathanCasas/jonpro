@@ -78,4 +78,25 @@ class UserController extends Controller {
         //
     }
 
+    /**
+     * Search user for select2
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function searchSelect(Request $request) {
+        $users = User::where('name', 'like', "%{$request->get('term')}%")
+                ->orWhere('email', 'like', "%{$request->get('term')}%")
+                ->paginate(10);
+        $dataJson = array();
+        foreach ($users as $user) {
+            $dataJson['results'][] = [
+                'id' => $user->id,
+                'text' => $user->name
+            ];
+        }
+        $dataJson['pagination'] = ['more' => $users->hasMorePages()];
+        return response()->json($dataJson);
+    }
+
 }

@@ -502,8 +502,9 @@
         </section>
         <section class="content">
             <div class="container-fluid">
-                @hasSection('block_header')
                 @include('flash::message')
+                @hasSection('block_header')
+                
                 @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>

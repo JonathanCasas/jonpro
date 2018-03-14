@@ -25,6 +25,9 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('/', 'HomeController@index')->name('home2');
     //Users
     Route::resource('users', 'UserController');
+    Route::group(['prefix' => 'users/ajax/'], function() {
+        Route::get('select2', 'UserController@searchSelect')->name('users.ajax.select2');
+    });
     //Projects
     Route::resource('projects', 'ProjectController');
     Route::group(['prefix' => 'projects/{project}'], function() {

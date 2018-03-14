@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller {
 
+    use \Joncasas\Operations\Tasks\ValidateTaskController,
+        \Joncasas\Operations\Tasks\TasksOperations;
+
     /**
      * Display a listing of the resource.
      *
@@ -28,11 +31,22 @@ class TaskController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
+     * @param \App\Models\Project $project
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
-        //
+    public function store(\App\Models\Project $project, Request $request) {
+        $v = $this->validateStore($request);
+        if ($v->fails()) {
+            return redirect()->back()->withErrors($v);
+        }
+        try {
+            $this->storeTaskProject($project, $request);
+            flash()->success('correctly created task');
+        } catch (\Exception $ex) {
+            flash()->error('An error has occurred: ' . $ex->getMessage());
+        }
+        return redirect()->back();
     }
 
     /**

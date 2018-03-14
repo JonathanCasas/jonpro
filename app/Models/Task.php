@@ -21,6 +21,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property string $priority
  * @property int $assigned_to
  * @property int $estimated_time
+ * @property \App\User $assigned
  * @property \Carbon\Carbon $start_date
  * @property \Carbon\Carbon $end_date
  * @property \Carbon\Carbon $created_at
@@ -64,6 +65,13 @@ class Task extends Eloquent {
 
     public function files_tasks() {
         return $this->hasMany(\App\Models\FilesTask::class, 'tasks_id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function assigned() {
+        return $this->belongsTo(\App\User::class, 'assigned_to', 'id');
     }
 
 }

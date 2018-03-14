@@ -60,7 +60,16 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project) {
-        //
+        $tasks = $project->tasks()->orderBy('created_at', 'desc')->paginate(10);
+        $states = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'state');
+        $priorities = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'priority');
+        $types = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'type');
+        return view('projects.tasks')
+                        ->with('project', $project)
+                        ->with('tasks', $tasks)
+                        ->with('states', $states)
+                        ->with('priorities', $priorities)
+                        ->with('types', $types);
     }
 
     /**

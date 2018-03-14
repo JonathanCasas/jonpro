@@ -50,7 +50,7 @@
                                 <a type="button" class="btn bg-amber waves-effect btn-xs">
                                     <i class="material-icons">mode_edit</i>
                                 </a>
-                                <a type="button" class="btn bg-info waves-effect btn-xs">
+                                <a href="{{route('projects.show',['project'=>$project])}}" type="button" class="btn bg-info waves-effect btn-xs">
                                     <i class="material-icons">remove_red_eye</i>
                                 </a>
                             </td>
