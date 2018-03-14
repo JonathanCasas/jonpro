@@ -30,4 +30,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'projects/{project}'], function() {
         Route::resource('tasks', 'TaskController');
     });
+    //Companies
+    Route::group(['prefix' => 'companies/ajax/'], function() {
+        Route::get('select2', 'CompanyController@searchSelect')->name('companies.ajax.select2');
+    });
 });

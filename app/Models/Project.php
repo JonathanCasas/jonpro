@@ -17,8 +17,10 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property string $state
  * @property string $priority
  * @property \Carbon\Carbon $start_date
+ * @property \Carbon\Carbon $end_date
  * @property string $description
  * @property int $company_id
+ * @property int $created_by
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property string $deleted_at
@@ -29,6 +31,7 @@ use Illuminate\Database\Eloquent\Model as Eloquent;
  * @property \Illuminate\Database\Eloquent\Collection $tasks
  * @property \Illuminate\Database\Eloquent\Collection $teams
  * @property \Illuminate\Database\Eloquent\Collection $tickets
+ * @property \App\User $creator
  *
  * @package App\Models
  */
@@ -37,10 +40,12 @@ class Project extends Eloquent {
     use \Illuminate\Database\Eloquent\SoftDeletes;
 
     protected $casts = [
-        'company_id' => 'int'
+        'company_id' => 'int',
+        'created_by' => 'int'
     ];
     protected $dates = [
-        'start_date'
+        'start_date',
+        'end_date'
     ];
     protected $fillable = [
         'name',
@@ -48,7 +53,9 @@ class Project extends Eloquent {
         'priority',
         'start_date',
         'description',
-        'company_id'
+        'company_id',
+        'created_by',
+        'end_date'
     ];
 
     public function company() {
@@ -73,6 +80,10 @@ class Project extends Eloquent {
 
     public function tickets() {
         return $this->hasMany(\App\Models\Ticket::class, 'projects_id');
+    }
+
+    public function creator() {
+        return $this->belongsTo(\App\User::class, 'created_by', 'id');
     }
 
 }

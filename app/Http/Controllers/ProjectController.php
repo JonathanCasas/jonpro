@@ -5,16 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Project;
 use Illuminate\Http\Request;
 
-class ProjectController extends Controller
-{
+class ProjectController extends Controller {
+
+    use \Joncasas\Operations\Projects\ValidateProjectController,
+        \Joncasas\Operations\Projects\ProjectOperations;
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $projects = Project::paginate(10);
+        return view('projects.index', ['projects' => $projects]);
     }
 
     /**
@@ -22,20 +25,32 @@ class ProjectController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        $states = \Joncasas\Operations\DatabaseHelpers::getEnumValues('projects', 'state');
+        $priorities = \Joncasas\Operations\DatabaseHelpers::getEnumValues('projects', 'priority');
+        return view('projects.create')
+                        ->with('states', $states)
+                        ->with('priorities', $priorities);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response$column
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+        $v = $this->validateStore($request);
+        if ($v->fails()) {
+            return redirect()->back()->withErrors($v);
+        }
+        try {
+            $this->storeProject($request);
+            flash()->success('Correctly created project');
+        } catch (\Exception $ex) {
+            flash()->error('An error has occurred: ' . $ex->getMessage());
+        }
+        return redirect()->back();
     }
 
     /**
@@ -44,8 +59,7 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project)
-    {
+    public function show(Project $project) {
         //
     }
 
@@ -55,8 +69,7 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function edit(Project $project)
-    {
+    public function edit(Project $project) {
         //
     }
 
@@ -67,8 +80,7 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
-    {
+    public function update(Request $request, Project $project) {
         //
     }
 
@@ -78,8 +90,8 @@ class ProjectController extends Controller
      * @param  \App\Models\Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Project $project)
-    {
+    public function destroy(Project $project) {
         //
     }
+
 }

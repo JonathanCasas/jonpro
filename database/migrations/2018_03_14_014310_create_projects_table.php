@@ -17,6 +17,8 @@ class CreateProjectsTable extends Migration {
             $table->enum('state', array('New', 'Waiting', 'Open', 'Closed', 'Canceled'))->default('New');
             $table->enum('priority', array('Lower', 'Normal', 'High', 'Urgent'));
             $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
+            $table->integer('created_by');
             $table->text('description', 16777215)->nullable();
             $table->integer('company_id')->index('fk_projects_company_idx');
             $table->timestamps();
