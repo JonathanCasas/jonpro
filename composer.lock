@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "a529934503639f8c6783b21b7efe77f1",
+    "content-hash": "1b2ae4bd978f93253a9c80c522b3dc9d",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -454,6 +454,60 @@
             "time": "2015-04-20T18:58:01+00:00"
         },
         {
+            "name": "laracasts/flash",
+            "version": "3.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laracasts/flash.git",
+                "reference": "10cd420ab63fd0796bf5e1e5b99f87636d2f4333"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laracasts/flash/zipball/10cd420ab63fd0796bf5e1e5b99f87636d2f4333",
+                "reference": "10cd420ab63fd0796bf5e1e5b99f87636d2f4333",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "~5.0",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master",
+                "phpunit/phpunit": "^6.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laracasts\\Flash\\FlashServiceProvider"
+                    ],
+                    "aliases": {
+                        "Flash": "Laracasts\\Flash\\Flash"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Laracasts\\Flash": "src/"
+                },
+                "files": [
+                    "src/Laracasts/Flash/functions.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jeffrey Way",
+                    "email": "jeffrey@laracasts.com"
+                }
+            ],
+            "description": "Easy flash notifications",
+            "time": "2017-06-22T19:01:19+00:00"
+        },
+        {
             "name": "laravel/framework",
             "version": "v5.6.11",
             "source": {
@@ -653,6 +707,67 @@
                 "psysh"
             ],
             "time": "2018-03-06T17:34:36+00:00"
+        },
+        {
+            "name": "laravelista/ekko",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravelista/Ekko.git",
+                "reference": "f62f295a391be28b2628b66e88b7dddc3ff66a5f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravelista/Ekko/zipball/f62f295a391be28b2628b66e88b7dddc3ff66a5f",
+                "reference": "f62f295a391be28b2628b66e88b7dddc3ff66a5f",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/routing": "~4.0|~5.0",
+                "illuminate/support": "~4.0|~5.0",
+                "php": ">=5.6.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.4",
+                "phpunit/phpunit": "^5.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Laravelista\\Ekko\\EkkoServiceProvider"
+                    ],
+                    "aliases": {
+                        "Ekko": "Laravelista\\Ekko\\Facades\\Ekko"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Laravelista\\Ekko\\": "src/"
+                },
+                "files": [
+                    "src/Laravelista/Ekko/helpers.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Mario Basic",
+                    "email": "mario.basic@outlook.com"
+                }
+            ],
+            "description": "Laravel helper for detecting active navigation menu items and applying bootstrap classes.",
+            "keywords": [
+                "bootstrap",
+                "helper",
+                "laravel",
+                "navigation"
+            ],
+            "time": "2018-01-18T10:44:12+00:00"
         },
         {
             "name": "league/flysystem",
