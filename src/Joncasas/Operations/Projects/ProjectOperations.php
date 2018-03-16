@@ -23,4 +23,18 @@ trait ProjectOperations {
         }
     }
 
+    /**
+     * @param \App\Models\Project $project
+     * @param \Illuminate\Http\Request $request
+     * @return null
+     * @throws \Exception
+     */
+    protected function updateProject(\App\Models\Project $project, \Illuminate\Http\Request $request) {
+        try {
+            $project->update($request->all());
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
+
 }

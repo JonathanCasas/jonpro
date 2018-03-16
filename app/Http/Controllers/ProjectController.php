@@ -79,7 +79,12 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project) {
-        //
+        $states = \Joncasas\Operations\DatabaseHelpers::getEnumValues('projects', 'state');
+        $priorities = \Joncasas\Operations\DatabaseHelpers::getEnumValues('projects', 'priority');
+        return view('projects.update')
+                        ->with('states', $states)
+                        ->with('priorities', $priorities)
+                        ->with('project', $project);
     }
 
     /**
@@ -90,7 +95,17 @@ class ProjectController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Project $project) {
-        //
+        $v = $this->validateStore($request);
+        if ($v->fails()) {
+            return redirect()->back()->withErrors($v);
+        }
+        try {
+            $this->updateProject($project, $request);
+            flash()->success('Correctly updated project');
+        } catch (\Exception $ex) {
+            flash()->error('An error has occurred: ' . $ex->getMessage());
+        }
+        return redirect()->back();
     }
 
     /**

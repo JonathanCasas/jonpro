@@ -47,7 +47,7 @@
                             <td>{{$project->creator->name}}</td>
                             <td>{{$project->company->name}}</td>
                             <td>
-                                <a type="button" class="btn bg-amber waves-effect btn-xs">
+                                <a href="{{route('projects.edit',['project'=>$project])}}" class="btn bg-amber waves-effect btn-xs">
                                     <i class="material-icons">mode_edit</i>
                                 </a>
                                 <a href="{{route('projects.show',['project'=>$project])}}" type="button" class="btn bg-info waves-effect btn-xs">
