@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('projects', 'ProjectController');
     Route::group(['prefix' => 'projects/{project}'], function() {
         Route::resource('tasks', 'TaskController');
-        Route::post('task/update/','TaskController@update')->name('task.project.update');
+        Route::post('task/update/', 'TaskController@update')->name('task.project.update');
     });
     //Companies
     Route::resource('companies', 'CompanyController');
@@ -43,4 +43,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'tasks'], function() {
         Route::post('/ajax/get', 'TaskController@getAjaxTask')->name('tasks.ajax.get');
     });
+
+    Route::get('settings', 'SettingsController@create')->name('settings.create');
+    Route::post('settings', 'SettingsController@store')->name('settings.store');
 });

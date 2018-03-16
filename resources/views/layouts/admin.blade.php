@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8">
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-        <title>Alerts | Bootstrap Based Admin Template - Material Design</title>
+        <title>{{Jonpro::getSiteName()}}</title>
         <!-- Favicon-->
-        <link rel="icon" href="{{asset('/material/favicon.ico')}}" type="image/x-icon">
+        <link rel="icon" href="{{asset('/jonpro/jonpro-icon.png')}}" type="image/x-icon">
 
         <!-- Google Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&subset=latin,cyrillic-ext" rel="stylesheet" type="text/css">
@@ -74,7 +74,7 @@
                 <div class="navbar-header">
                     <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
                     <a href                             ="javascript:void(0);" class="bars"></a>
-                    <a class="navbar-brand" href="../../index.html">ADMINBSB - MATERIAL DESIGN</a>
+                    <a class="navbar-brand" href="../../index.html">{{Jonpro::getSiteTitle()}}</a>
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
@@ -332,20 +332,26 @@
                                 <span>Companies</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="javascript:void(0);" class="menu-toggle">
-                                <i class="material-icons">swap_calls</i>
-                                <span>User Interface (UI)</span>
+                        <li class="{{isActiveRoute('settings.*')}}">
+                            <a href="{{route('settings.create')}}">
+                                <i class="material-icons">settings</i>
+                                <span>Settings</span>
                             </a>
-                            <ul class="ml-menu">
-                                <li>
-                                    <a href="../../pages/ui/alerts.html">Alerts</a>
-                                </li>
-                                <li>
-                                    <a href="../../pages/ui/animations.html">Animations</a>
-                                </li>
-                            </ul>
                         </li>
+                        <!--                        <li>
+                                                    <a href="javascript:void(0);" class="menu-toggle">
+                                                        <i class="material-icons">swap_calls</i>
+                                                        <span>User Interface (UI)</span>
+                                                    </a>
+                                                    <ul class="ml-menu">
+                                                        <li>
+                                                            <a href="../../pages/ui/alerts.html">Alerts</a>
+                                                        </li>
+                                                        <li>
+                                                            <a href="../../pages/ui/animations.html">Animations</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>-->
 
                     </ul>
                 </div>
