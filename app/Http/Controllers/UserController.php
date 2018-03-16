@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller {
 
+    use \Joncasas\Operations\Users\ValidateUserController,
+        \Joncasas\Operations\Users\UsersOperations;
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +17,8 @@ class UserController extends Controller {
      */
     public function index() {
         $users = User::paginate(10);
-        //return view('users.index', ['users' => $users]);
-        return view('home');
+        return view('users.index')
+                        ->with('users', $users);
     }
 
     /**
@@ -24,7 +27,7 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        return view('users.create');
     }
 
     /**
@@ -34,7 +37,17 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        $v = $this->validateStore($request);
+        if ($v->fails()) {
+            return redirect()->back()->withErrors($v);
+        }
+        try {
+            $this->storeUser($request);
+            flash()->success('User created correctly');
+        } catch (\Exception $ex) {
+            flash()->error('An error has occurred: ' . $ex->getMessage());
+        }
+        return redirect()->back();
     }
 
     /**
@@ -54,7 +67,8 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user) {
-        //
+        return view('users.update')
+                        ->with('user', $user);
     }
 
     /**
@@ -65,7 +79,17 @@ class UserController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user) {
-        //
+        $v = $this->validateUpdate($request);
+        if ($v->fails()) {
+            return redirect()->back()->withErrors($v);
+        }
+        try {
+            $this->updateUser($user, $request);
+            flash()->success('User updated correctly');
+        } catch (\Exception $ex) {
+            flash()->error('An error has occurred: ' . $ex->getMessage());
+        }
+        return redirect()->back();
     }
 
     /**
