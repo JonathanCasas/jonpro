@@ -34,6 +34,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::resource('tasks', 'TaskController');
     });
     //Companies
+    Route::resource('companies', 'CompanyController');
     Route::group(['prefix' => 'companies/ajax/'], function() {
         Route::get('select2', 'CompanyController@searchSelect')->name('companies.ajax.select2');
     });

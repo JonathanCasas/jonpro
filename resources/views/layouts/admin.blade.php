@@ -326,6 +326,12 @@
                                 <span>Users</span>
                             </a>
                         </li>
+                        <li class="{{isActiveRoute('companies.*')}}">
+                            <a href="{{route('companies.index')}}">
+                                <i class="material-icons">domain</i>
+                                <span>Companies</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="javascript:void(0);" class="menu-toggle">
                                 <i class="material-icons">swap_calls</i>
@@ -504,7 +510,7 @@
             <div class="container-fluid">
                 @include('flash::message')
                 @hasSection('block_header')
-                
+
                 @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
