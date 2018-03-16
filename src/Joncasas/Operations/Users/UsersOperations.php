@@ -37,7 +37,7 @@ trait UsersOperations {
      */
     protected function updateUser(\App\User $user, \Illuminate\Http\Request $request) {
         try {
-            if ($request->has('password')) {
+            if ($request->has('password') && !is_null($request->get('password'))) {
                 $user->password = bcrypt($request->get('password'));
             }
             $user->name = $request->get('name');

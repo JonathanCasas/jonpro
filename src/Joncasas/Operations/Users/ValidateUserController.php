@@ -15,7 +15,7 @@ trait ValidateUserController {
     protected function validateStore(\Illuminate\Http\Request $request) {
         return validator($request->all(), [
             'name' => 'required',
-            'email' => 'email|unique',
+            'email' => 'email|unique:users',
             'password' => 'required|confirmed'
         ]);
     }
