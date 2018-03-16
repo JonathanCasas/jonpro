@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller {
 
+    use \Joncasas\Operations\Companies\ValiteCompanyController,
+        \Joncasas\Operations\Companies\CompanyOperations;
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +26,7 @@ class CompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        //
+        return view('companies.create');
     }
 
     /**
@@ -33,7 +36,17 @@ class CompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+        $v = $this->validateStore($request);
+        if ($v->fails()) {
+            return redirect()->back()->withErrors($v);
+        }
+        try {
+            $this->storeCompany($request);
+            flash()->success('Company created correctly');
+        } catch (\Exception $ex) {
+            flash()->error('An error has occurred: ' . $ex->getMessage());
+        }
+        return redirect()->back();
     }
 
     /**
@@ -53,7 +66,7 @@ class CompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function edit(Company $company) {
-        //
+        return view('companies.update')->with('company', $company);
     }
 
     /**
@@ -64,7 +77,17 @@ class CompanyController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Company $company) {
-        //
+        $v = $this->validateUpdate($request);
+        if ($v->fails()) {
+            return redirect()->back()->withErrors($v);
+        }
+        try {
+            $this->updateCompany($company, $request);
+            flash()->success('Company updated correctly');
+        } catch (\Exception $ex) {
+            flash()->error('An error has occurred: ' . $ex->getMessage());
+        }
+        return redirect()->back();
     }
 
     /**
