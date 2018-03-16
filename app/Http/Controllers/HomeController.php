@@ -21,7 +21,12 @@ class HomeController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        return view('home');
+        $projects = \App\Models\Project::all();
+        $tasks = \App\Models\Task::where('assigned_to', '=', auth()->user()->id)
+                ->whereIn('state', ['Open', 'Waiting', 'New'])
+                ->orderBy('start_date', 'asc')
+                ->paginate(10);
+        return view('home')->with('tasks', $tasks);
     }
 
 }
