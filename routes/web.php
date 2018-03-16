@@ -32,10 +32,15 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('projects', 'ProjectController');
     Route::group(['prefix' => 'projects/{project}'], function() {
         Route::resource('tasks', 'TaskController');
+        Route::post('task/update/','TaskController@update')->name('task.project.update');
     });
     //Companies
     Route::resource('companies', 'CompanyController');
     Route::group(['prefix' => 'companies/ajax/'], function() {
         Route::get('select2', 'CompanyController@searchSelect')->name('companies.ajax.select2');
+    });
+    //Tasks
+    Route::group(['prefix' => 'tasks'], function() {
+        Route::post('/ajax/get', 'TaskController@getAjaxTask')->name('tasks.ajax.get');
     });
 });

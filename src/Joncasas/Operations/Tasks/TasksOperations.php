@@ -23,5 +23,19 @@ trait TasksOperations {
             throw new \Exception($ex->getMessage());
         }
     }
+    
+    /**
+     * @param \App\Models\Task $task
+     * @param \Illuminate\Http\Request $request
+     * @return null
+     * @throws \Exception
+     */
+    protected function updateTaskProject(\App\Models\Task $task, \Illuminate\Http\Request $request) {
+        try {
+            $task->update($request->all());
+        } catch (\Exception $ex) {
+            throw new \Exception($ex->getMessage());
+        }
+    }
 
 }

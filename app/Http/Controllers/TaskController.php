@@ -76,8 +76,19 @@ class TaskController extends Controller {
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Task $task) {
-        //
+    public function update(Request $request) {
+        $v = $this->validateStore($request);
+        if ($v->fails()) {
+            return redirect()->back()->withErrors($v);
+        }
+        try {
+            $task = Task::find($request->get('id'));
+            $this->updateTaskProject($task, $request);
+            flash()->success('correctly updated task');
+        } catch (\Exception $ex) {
+            flash()->error('An error has occurred: ' . $ex->getMessage());
+        }
+        return redirect()->back();
     }
 
     /**
@@ -88,6 +99,26 @@ class TaskController extends Controller {
      */
     public function destroy(Task $task) {
         //
+    }
+
+    /**
+     * Get task with ajax
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function getAjaxTask(Request $request) {
+        if ($request->ajax()) {
+            $task = Task::find($request->get('id'));
+            if (!is_null($task->start_date)) {
+                $task->start_date = $task->start_date->format('Y-m-d');
+            }
+            if (!is_null($task->end_date)) {
+                $task->end_date = $task->end_date->format('Y-m-d');
+            }
+            $task->assigned;
+            return response()->json($task);
+        }
     }
 
 }
