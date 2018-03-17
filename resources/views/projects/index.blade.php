@@ -43,7 +43,7 @@
                             <td>{{$project->name}}</td>
                             <td>{{$project->state}}</td>
                             <td>{{$project->priority}}</td>
-                            <td>{{$project->start_date->format('Y-m-d')}}</td>
+                            <td>{{!is_null($project->start_date)?$project->start_date->format('Y-m-d'):''}}</td>
                             <td>{{$project->creator->name}}</td>
                             <td>{{$project->company->name}}</td>
                             <td>
