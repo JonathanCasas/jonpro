@@ -20,13 +20,19 @@ class HomeController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $projects = \App\Models\Project::all();
+    public function index(Request $request) {
         $tasks = \App\Models\Task::where('assigned_to', '=', auth()->user()->id)
                 ->whereIn('state', ['Open', 'Waiting', 'New'])
                 ->orderBy('start_date', 'asc')
-                ->paginate(10);
-        return view('home')->with('tasks', $tasks);
+                ->paginate(10, ['*'], 'all');
+        $dayTasks = \App\Models\Task::where('assigned_to', '=', auth()->user()->id)
+                ->whereIn('state', ['Open', 'Waiting', 'New'])
+                ->where('start_date', '<=', \Carbon\Carbon::now()->format('Y-m-d'))
+                ->orWhereNull('start_date')
+                ->whereIn('state', ['Open', 'Waiting', 'New'])
+                ->where('assigned_to', '=', auth()->user()->id)
+                ->paginate(10, ['*'], 'day');
+        return view('home')->with('tasks', $tasks)->with('dayTasks', $dayTasks);
     }
 
 }
