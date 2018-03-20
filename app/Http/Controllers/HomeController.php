@@ -20,7 +20,7 @@ class HomeController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request) {
+    public function index() {
         $tasks = \App\Models\Task::where('assigned_to', '=', auth()->user()->id)
                 ->whereIn('state', ['Open', 'Waiting', 'New'])
                 ->orderBy('start_date', 'asc')
@@ -32,7 +32,15 @@ class HomeController extends Controller {
                 ->whereIn('state', ['Open', 'Waiting', 'New'])
                 ->where('assigned_to', '=', auth()->user()->id)
                 ->paginate(10, ['*'], 'day');
-        return view('home')->with('tasks', $tasks)->with('dayTasks', $dayTasks);
+        $states = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'state');
+        $priorities = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'priority');
+        $types = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'type');
+        return view('home')
+                        ->with('tasks', $tasks)
+                        ->with('dayTasks', $dayTasks)
+                        ->with('states', $states)
+                        ->with('priorities', $priorities)
+                        ->with('types', $types);
     }
 
 }

@@ -110,6 +110,7 @@ class TaskController extends Controller {
     public function getAjaxTask(Request $request) {
         if ($request->ajax()) {
             $task = Task::find($request->get('id'));
+            $task->project;
             if (!is_null($task->start_date)) {
                 $task->start_date = $task->start_date->format('Y-m-d');
             }

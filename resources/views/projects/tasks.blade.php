@@ -195,7 +195,7 @@ Tasks &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success waves-effec
             <div class="modal-content">
                 <form action="{{route('task.project.update',['project'=>$project])}}" method="POST" >
                     <div class="modal-header">
-                        <h4 class="modal-title" id="largeModalLabel">New Task</h4>
+                        <h4 class="modal-title" id="largeModalLabel">View Task</h4>
                     </div>
                     <div class="modal-body">
                         {{csrf_field()}}
@@ -351,12 +351,14 @@ $(document).ready(function () {
             },
             success: function (data, textStatus, jqXHR) {
                 console.log(data);
+                 var comments = data.comments;
+                comments = comments == null || comments == '' ? '' : comments;
                 $('#txt-id').val(data.id);
                 $('#txt-end_date').val(data.end_date);
                 $('#txt-estimated_time').val(data.estimated_time);
                 $('#txt-name').val(data.name);
                 $('#txt-start_date').val(data.start_date);
-                tinyMCE.activeEditor.setContent(data.comments);
+                tinyMCE.activeEditor.setContent(comments);
                 $('#sl-priority').val(data.priority).trigger('change');
                 $('#sl-state').val(data.state).trigger('change');
                 $('#sl-type').val(data.type).trigger('change');
