@@ -7,7 +7,7 @@
         <div class="card">
             <div class="header">
                 <h2>
-                    New Project
+                    New User
                 </h2>
             </div>
             <div class="body">

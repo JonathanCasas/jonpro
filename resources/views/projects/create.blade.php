@@ -1,5 +1,6 @@
 @extends('layouts.admin')
 @section('block_header','Projects')
+
 @section('css')
 <style>
     .select2-container--default .select2-selection--single {

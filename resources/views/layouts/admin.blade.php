@@ -515,8 +515,6 @@
         <section class="content">
             <div class="container-fluid">
                 @include('flash::message')
-                @hasSection('block_header')
-
                 @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -526,15 +524,29 @@
                     </ul>
                 </div>
                 @endif
-                <div class="block-header">
-                    <h2>
-                        @yield('block_header')
-                        <small>
-                            @yield('block_header_small')
-                        </small>
-                    </h2>
-                </div>
-                @endif
+
+                <ol class="breadcrumb breadcrumb-bg-cyan">
+                    @if(isActiveRoute('*.index')=='active'||isActiveRoute('settings.create')=='active'||isActiveRoute('home')=='active'||isActiveRoute('home2')=='active')
+                    @if(isActiveRoute('projects.index')=='active')
+                    <li><a href="javascript:void(0);"><i class="material-icons">folder</i> Projects</a></li>
+                    @endif
+                    @if(isActiveRoute('companies.index')=='active')
+                    <li><a href="javascript:void(0);"><i class="material-icons">domain</i> Companies</a></li>
+                    @endif
+                    @if(isActiveRoute('users.index')=='active')
+                    <li><a href="javascript:void(0);"><i class="material-icons">people</i> Users</a></li>
+                    @endif
+                    @if(isActiveRoute('settings.create')=='active')
+                    <li><a href="javascript:void(0);"><i class="material-icons">settings</i> Settings</a></li>
+                    @endif
+                    @if(isActiveRoute('home')=='active'||isActiveRoute('home2')=='active')
+                    <li><a href="javascript:void(0);"><i class="material-icons">home</i> Home</a></li>
+                    @endif
+                    @endif
+                    @if(isActiveRoute('')=='active')
+                    
+                    @endif
+                </ol>
                 @yield('content')
             </div>
         </section>
