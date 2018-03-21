@@ -16,12 +16,10 @@
 Auth::routes();
 
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::resource('users', 'UserController');
 
 Route::group(['middleware' => 'auth'], function() {
     //Home
-
+    Route::get('/home', 'HomeController@index')->name('home');
     Route::get('/', 'HomeController@index')->name('home2');
     //Users
     Route::resource('users', 'UserController');
