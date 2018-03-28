@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.jonpro')
 @section('content')
 <div class="login-box">
     <div class="logo">
