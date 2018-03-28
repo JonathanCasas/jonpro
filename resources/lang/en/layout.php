@@ -2,5 +2,9 @@
 
 return [
     'welcome' => 'Welcome',
-    'home' => 'Home'
+    'home' => 'Home',
+    'projects' => 'Projects',
+    'users' => 'Users',
+    'companies' => 'Companies',
+    'settings' => 'Settings'
 ];

@@ -9,7 +9,7 @@
         <div class="col-md-3 left_col">
             <div class="left_col scroll-view">
                 <div class="navbar nav_title" style="border: 0;">
-                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentelella Alela!</span></a>
+                    <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>{{Jonpro::getSiteTitle()}}</span></a>
                 </div>
 
                 <div class="clearfix"></div>
@@ -34,7 +34,10 @@
                         <h3>General</h3>
                         <ul class="nav side-menu">
                             <li><a href="{{route('home')}}"><i class="fa fa-home"></i> {{__('layout.home')}}</a></li>
-
+                            <li><a href="{{route('projects.index')}}"><i class="fa fa-folder"></i> {{__('layout.projects')}}</a></li>
+                            <li><a href="{{route('users.index')}}"><i class="fa fa-users"></i> {{__('layout.users')}}</a></li>
+                            <li><a href="{{route('companies.index')}}"><i class="fa fa-institution"></i> {{__('layout.companies')}}</a></li>
+                            <li><a href="{{route('settings.create')}}"><i class="fa fa-gears"></i> {{__('layout.settings')}}</a></li>
                         </ul>
                     </div>
                 </div>

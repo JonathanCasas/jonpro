@@ -1,23 +1,17 @@
-@extends('layouts.admin')
-@section('block_header','Projects')
-@section('css')
-<style>
-    .select2-container--default .select2-selection--single {
-        border: 0px solid #aaa !important; 
-    }
-</style>
-@endsection
+@extends('layouts.jonpro')
+@section('page_title','Projects')
 
 @section('content')
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
+        <div class="x_panel">
+            <div class="x_title">
                 <h2>
                     Project {{$project->name}}
                 </h2>
+                <div class="clearfix"></div>
             </div>
-            <div class="body">
+            <div class="x_content">
                 <form action="{{route('projects.update',['project'=>$project])}}" method="POST">
                     {{csrf_field()}}
                     {{method_field('PUT')}}
@@ -124,7 +118,7 @@
 @endsection
 @section('js')
 <!-- TinyMCE -->
-<script src="{{asset('/material/plugins/tinymce/tinymce.js')}}"></script>
+<script src="{{asset('/jonpro/tinymce/tinymce.js')}}"></script>
 <script>
 $(function () {
 //TinyMCE
@@ -143,13 +137,13 @@ $(function () {
         image_advtab: true
     });
     tinymce.suffix = ".min";
-    tinyMCE.baseURL = '/material/plugins/tinymce';
+    tinyMCE.baseURL = '/jonpro/tinymce';
 });
 $(document).ready(function () {
     $('.date').inputmask("yyyy-mm-dd");
     $jp('.companies').companies("{{route('companies.ajax.select2')}}");
     $('.jonpro-select').select2({
-        width: '90%'
+        width: '100%'
     });
 });
 </script>

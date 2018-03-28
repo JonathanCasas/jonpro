@@ -1,14 +1,7 @@
 @extends('projects.information')
 @section('active_tasks','active')
 @section('tab_title')
-Tasks &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success waves-effect m-r-20" data-toggle="modal" data-target="#largeModal"><i class="material-icons">add</i>Add</button>
-@endsection
-@section('css')
-<style>
-    .select2-container--default .select2-selection--single {
-        border: 0px solid #aaa !important; 
-    }
-</style>
+Tasks &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success w" data-toggle="modal" data-target="#largeModal"><i class="fa fa-plus"></i> Add</button>
 @endsection
 @section('tab_content')
 <div id="preloader">
@@ -53,8 +46,8 @@ Tasks &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success waves-effec
                 <td>{{!is_null($task->end_date)?$task->end_date->format('Y-m-d'):''}}</td>
                 <td>{{$task->estimated_time}}</td>
                 <td>
-                    <button class="btn bg-amber waves-effect btn-xs task" task="{{$task->id}}">
-                        <i class="material-icons">mode_edit</i>
+                    <button class="btn btn-info btn-sm task" task="{{$task->id}}">
+                        <i class="fa fa-pencil"></i>
                     </button>
                 </td>
             </tr>
@@ -312,7 +305,7 @@ Tasks &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success waves-effec
 @endsection
 @section('js')
 <!-- TinyMCE -->
-<script src="{{asset('/material/plugins/tinymce/tinymce.js')}}"></script>
+<script src="{{asset('/jonpro/tinymce/tinymce.js')}}"></script>
 <script>
 $(function () {
 //TinyMCE
@@ -331,7 +324,7 @@ $(function () {
         image_advtab: true
     });
     tinymce.suffix = ".min";
-    tinyMCE.baseURL = '/material/plugins/tinymce';
+    tinyMCE.baseURL = '/jonpro/tinymce';
 });
 $(document).ready(function () {
     $('#preloader').hide(200);
@@ -351,7 +344,7 @@ $(document).ready(function () {
             },
             success: function (data, textStatus, jqXHR) {
                 console.log(data);
-                 var comments = data.comments;
+                var comments = data.comments;
                 comments = comments == null || comments == '' ? '' : comments;
                 $('#txt-id').val(data.id);
                 $('#txt-end_date').val(data.end_date);
