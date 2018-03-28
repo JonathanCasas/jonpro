@@ -22,9 +22,8 @@ class HomeController extends Controller {
      */
     public function index() {
         $tasks = \App\Models\Task::where('assigned_to', '=', auth()->user()->id)
-                ->whereIn('state', ['Open', 'Waiting', 'New'])
-                ->orderBy('start_date', 'asc')
-                ->paginate(10, ['*'], 'all');
+                        ->whereIn('state', ['Open', 'Waiting', 'New'])
+                        ->orderBy('start_date', 'asc')->get()->take(5);
         $dayTasks = \App\Models\Task::where('assigned_to', '=', auth()->user()->id)
                 ->whereIn('state', ['Open', 'Waiting', 'New'])
                 ->where('start_date', '<=', \Carbon\Carbon::now()->format('Y-m-d'))
@@ -41,6 +40,14 @@ class HomeController extends Controller {
                         ->with('states', $states)
                         ->with('priorities', $priorities)
                         ->with('types', $types);
+    }
+
+    public function allTasks() {
+        $tasks = \App\Models\Task::where('assigned_to', '=', auth()->user()->id)
+                ->whereIn('state', ['Open', 'Waiting', 'New'])
+                ->orderBy('start_date', 'asc')
+                ->paginate(10, ['*'], 'all');
+        return view('tasks')->with('tasks', $tasks);
     }
 
 }

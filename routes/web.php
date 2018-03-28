@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function() {
     //Tasks
     Route::group(['prefix' => 'tasks'], function() {
         Route::post('/ajax/get', 'TaskController@getAjaxTask')->name('tasks.ajax.get');
+        Route::get('/', 'HomeController@allTasks')->name('home.alltasks');
     });
 
     Route::get('settings', 'SettingsController@create')->name('settings.create');
