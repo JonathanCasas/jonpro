@@ -9,6 +9,7 @@
                 <h2>
                     New User
                 </h2>
+                <div class="clearfix"></div>
             </div>
             <div class="x_content">
                 <form action="{{route('users.store')}}" method="POST">
