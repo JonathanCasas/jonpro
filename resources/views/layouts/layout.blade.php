@@ -43,6 +43,7 @@
         <link href="{{asset('gentella/vendors/pnotify/dist/pnotify.css')}}" rel="stylesheet">
         <link href="{{asset('gentella/vendors/pnotify/dist/pnotify.buttons.css')}}" rel="stylesheet">
         <link href="{{asset('gentella/vendors/pnotify/dist/pnotify.nonblock.css')}}" rel="stylesheet">
+        <link href="{{asset('css/jonpro.css')}}" rel="stylesheet">
 
 
         @yield('css_main')
