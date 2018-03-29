@@ -4,13 +4,13 @@
 @section('content')
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
+        <div class="x_panel">
+            <div class="x_title">
                 <h2>
                     User: {{$user->name}}
                 </h2>
             </div>
-            <div class="body">
+            <div class="x_content">
                 <form action="{{route('users.update',['user'=>$user])}}" method="POST">
                     {{csrf_field()}}
                     {{method_field('PUT')}}
@@ -55,8 +55,8 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success waves-effect">
-                        <i class="material-icons">save</i>
-                        <span>SAVE</span>
+                        <i class="fa fa-save"></i>
+                        SAVE
                     </button>
                 </form>
             </div>
