@@ -5,14 +5,14 @@ var jonpro = function (element) {
     this.users = function (route) {
         this.select2(route);
     };
-    this.select2 = function (route) {
+    this.select2 = function (route, placeholder) {
         $(element).select2({
             ajax: {
                 url: route,
                 dataType: 'json',
                 data: function (params) {
                     var query = {
-                        search: params.term,
+                        term: params.term,
                         page: params.page || 1
                     }
                     return query;
@@ -23,7 +23,7 @@ var jonpro = function (element) {
             delay: 250,
             lang: 'es',
             allowClear: true,
-            placeholder: 'Search companies',
+            placeholder: placeholder,
             minimumInputLength: 0,
             width: '100%'
         });

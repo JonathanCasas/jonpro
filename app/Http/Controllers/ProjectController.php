@@ -117,6 +117,21 @@ class ProjectController extends Controller {
     public function destroy(Project $project) {
         //
     }
-    
+
+    /**
+     * Search projects for select2
+     */
+    public function select2(Request $request) {
+        $projects = Project::where('name', 'like', "%{$request->get('term')}%")->paginate(10);
+        $dataJson = array();
+        foreach ($projects as $project) {
+            $dataJson['results'][] = [
+                'id' => $project->id,
+                'text' => $project->name
+            ];
+        }
+        $dataJson['pagination'] = ['more' => $projects->hasMorePages()];
+        return response()->json($dataJson);
+    }
 
 }

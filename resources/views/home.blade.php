@@ -13,6 +13,7 @@
             </div>
             <div class="x_content">
                 <div class="table-responsive">
+
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -65,36 +66,68 @@
             </div>
             <div class="x_content">
                 <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>{{__('home.table.id')}}</th>
-                                <th>{{__('home.table.name')}}</th>
-                                <th>{{__('home.table.type')}}</th>
-                                <th>{{__('home.table.priority')}}</th>
-                                <th>{{__('home.table.project')}}</th>
-                                <th>{{__('home.table.action')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if($dayTasks->isNotEmpty())
-                            @foreach($dayTasks as $task)
-                            <tr>
-                                <th class="row">{{$task->id}}</th>
-                                <td>{{$task->name}}</td>
-                                <td>{{$task->type}}</td>
-                                <td>{{$task->priority}}</td>
-                                <td>{{$task->project->name}}</td>
-                                <td>
-                                    <button class="btn btn-info btn-sm task" task="{{$task->id}}">
-                                        <i class="fa fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            @endforeach
-                            @endif
-                        </tbody>
-                    </table>
+                    <form action="{{route('home')}}" method="GET">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>{{__('home.table.id')}}</th>
+                                    <th>{{__('home.table.name')}}</th>
+                                    <th>{{__('home.table.type')}}</th>
+                                    <th>{{__('home.table.priority')}}</th>
+                                    <th>{{__('home.table.project')}}</th>
+                                    <th>{{__('home.table.action')}}</th>
+                                </tr>
+                                <tr>
+                                    <th><input type="text" name="id" class="form-control"></th>
+                                    <th><input type="text" name="name" class="form-control"></th>
+                                    <th>
+                                        <select name="type" class="form-control jonpro-select">
+                                            <option value="">-- Select --</option>
+                                            @foreach($types as $type)
+                                            <option value="{{$type}}">{{$type}}</option>
+                                            @endforeach
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select name="priority" class="form-control jonpro-select">
+                                            <option value="">-- Select --</option>
+                                            @foreach($priorities as $priority)
+                                            <option value="{{$priority}}">{{$priority}}</option>
+                                            @endforeach
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <select class="form-control projects" name="project">
+
+                                        </select>
+                                    </th>
+                                    <th>
+                                        <button type="submit" name="filter" value="true" class="btn btn-dark btn-sm">
+                                            <i class="fa fa-filter"></i>
+                                        </button>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if($dayTasks->isNotEmpty())
+                                @foreach($dayTasks as $task)
+                                <tr>
+                                    <th class="row">{{$task->id}}</th>
+                                    <td>{{$task->name}}</td>
+                                    <td>{{$task->type}}</td>
+                                    <td>{{$task->priority}}</td>
+                                    <td>{{$task->project->name}}</td>
+                                    <td>
+                                        <button class="btn btn-info btn-sm task" task="{{$task->id}}">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </form>
                     @if($dayTasks->isEmpty())
                     <div>
                         No results found
@@ -256,6 +289,7 @@ $(document).ready(function () {
         width: '100%'
     });
     $jp('.users').users("{{route('users.ajax.select2')}}");
+    $jp('.projects').select2("{{route('projects.search.select2')}}", "Projects")
     $('.task').click(function () {
         var task = $(this).attr('task');
         $.ajax({

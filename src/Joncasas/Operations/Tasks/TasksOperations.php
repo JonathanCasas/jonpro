@@ -37,5 +37,5 @@ trait TasksOperations {
             throw new \Exception($ex->getMessage());
         }
     }
-
+    
 }

@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function() {
         Route::resource('tasks', 'TaskController');
         Route::post('task/update/', 'TaskController@update')->name('task.project.update');
     });
+    Route::get('projects/search/select2', 'ProjectController@select2')->name('projects.search.select2');
     //Companies
     Route::resource('companies', 'CompanyController');
     Route::group(['prefix' => 'companies/ajax/'], function() {
