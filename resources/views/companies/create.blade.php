@@ -1,16 +1,17 @@
-@extends('layouts.admin')
-@section('block_header','Companies')
+@extends('layouts.jonpro')
+@section('page_title','Companies')
 
 @section('content')
 <div class="row clearfix">
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-        <div class="card">
-            <div class="header">
+        <div class="x_panel">
+            <div class="x_title">
                 <h2>
                     New Company
                 </h2>
+                <div class="clearfix"></div>
             </div>
-            <div class="body">
+            <div class="x_content">
                 <form action="{{route('companies.store')}}" method="POST">
                     {{csrf_field()}}
                     <div class="row clearfix">
@@ -36,8 +37,8 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success waves-effect">
-                        <i class="material-icons">save</i>
-                        <span>SAVE</span>
+                        <i class="fa fa-save"></i>
+                        SAVE
                     </button>
                 </form>
             </div>

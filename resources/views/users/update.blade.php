@@ -1,4 +1,4 @@
-@extends('layouts.admin')
+@extends('layouts.jonpro')
 @section('block_header','Users')
 
 @section('content')
