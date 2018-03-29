@@ -3,60 +3,7 @@
 
 @section('content')
 <div class="row clearfix">
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>
-                    {{__('home.pending_tasks')}}
-                </h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <div class="table-responsive">
-
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>{{__('home.table.id')}}</th>
-                                <th>{{__('home.table.name')}}</th>
-                                <th>{{__('home.table.type')}}</th>
-                                <th>{{__('home.table.priority')}}</th>
-                                <th>{{__('home.table.project')}}</th>
-                                <th>{{__('home.table.action')}}</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if($tasks->isNotEmpty())
-                            @foreach($tasks as $task)
-                            <tr>
-                                <th class="row">{{$task->id}}</th>
-                                <td>{{$task->name}}</td>
-                                <td>{{$task->type}}</td>
-                                <td>{{$task->priority}}</td>
-                                <td>{{$task->project->name}}</td>
-                                <td>
-                                    <button class="btn btn-info btn-sm task" task="{{$task->id}}">
-                                        <i class="fa fa-eye"></i>
-                                    </button>
-                                </td>
-                            </tr>
-                            @endforeach
-                            @endif
-                        </tbody>
-                    </table>
-                    @if($tasks->isEmpty())
-                    <div>
-                        No results found
-                    </div>
-                    @endif
-                    <div>
-                        <a href="{{route('home.alltasks')}}" class="links pull-right">View All</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-12">
         <div class="x_panel">
             <div class="x_title">
                 <h2>
@@ -140,6 +87,61 @@
             </div>
         </div>
     </div>
+
+    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    {{__('home.pending_tasks')}}
+                </h2>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="table-responsive">
+
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>{{__('home.table.id')}}</th>
+                                <th>{{__('home.table.name')}}</th>
+                                <th>{{__('home.table.type')}}</th>
+                                <th>{{__('home.table.priority')}}</th>
+                                <th>{{__('home.table.project')}}</th>
+                                <th>{{__('home.table.action')}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if($tasks->isNotEmpty())
+                            @foreach($tasks as $task)
+                            <tr>
+                                <th class="row">{{$task->id}}</th>
+                                <td>{{$task->name}}</td>
+                                <td>{{$task->type}}</td>
+                                <td>{{$task->priority}}</td>
+                                <td>{{$task->project->name}}</td>
+                                <td>
+                                    <button class="btn btn-info btn-sm task" task="{{$task->id}}">
+                                        <i class="fa fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                    @if($tasks->isEmpty())
+                    <div>
+                        No results found
+                    </div>
+                    @endif
+                    <div>
+                        <a href="{{route('home.alltasks')}}" class="links pull-right">View All</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 <div class="modal fade" id="update_task" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
