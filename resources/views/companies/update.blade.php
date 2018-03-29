@@ -39,8 +39,8 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success waves-effect">
-                        <i class="material-icons">save</i>
-                        <span>SAVE</span>
+                        <i class="fa fa-save"></i>
+                        SAVE
                     </button>
                 </form>
             </div>

@@ -9,6 +9,7 @@
                 <h2>
                     User: {{$user->name}}
                 </h2>
+                <div class="clearfix"></div>
             </div>
             <div class="x_content">
                 <form action="{{route('users.update',['user'=>$user])}}" method="POST">
