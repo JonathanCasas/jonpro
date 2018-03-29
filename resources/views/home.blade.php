@@ -12,7 +12,7 @@
                 <div class="clearfix"></div>
             </div>
             <div class="x_content">
-                <div class="table-responsive">
+                <div class="">
                     <form action="{{route('home')}}" method="GET">
                         <table class="table table-hover">
                             <thead>
