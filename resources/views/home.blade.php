@@ -25,13 +25,13 @@
                                     <th>{{__('home.table.action')}}</th>
                                 </tr>
                                 <tr>
-                                    <th><input type="text" name="id" class="form-control"></th>
-                                    <th><input type="text" name="name" class="form-control"></th>
+                                    <th><input type="text" name="id" value="{{$request->get('id')}}" class="form-control"></th>
+                                    <th><input type="text" name="name" value="{{$request->get('name')}}" class="form-control"></th>
                                     <th>
                                         <select name="type" class="form-control jonpro-select">
                                             <option value="">-- Select --</option>
                                             @foreach($types as $type)
-                                            <option value="{{$type}}">{{$type}}</option>
+                                            <option value="{{$type}}" {{$type==$request->get('type')?'selected':''}}>{{$type}}</option>
                                             @endforeach
                                         </select>
                                     </th>
@@ -39,13 +39,21 @@
                                         <select name="priority" class="form-control jonpro-select">
                                             <option value="">-- Select --</option>
                                             @foreach($priorities as $priority)
-                                            <option value="{{$priority}}">{{$priority}}</option>
+                                            <option value="{{$priority}}" {{$priority==$request->get('priority')?'selected':''}}>{{$priority}}</option>
                                             @endforeach
                                         </select>
                                     </th>
                                     <th>
+                                        @php
+                                        $project=null;
+                                        if($request->has('project')&&!is_null($request->get('project'))){
+                                            $project=\App\Models\Project::find($request->get('project'));
+                                        }  
+                                        @endphp
                                         <select class="form-control projects" name="project">
-
+                                            @if(!is_null($project))
+                                            <option value="{{$project->id}}" selected="">{{$project->name}}</option>
+                                            @endif
                                         </select>
                                     </th>
                                     <th>
@@ -65,7 +73,7 @@
                                     <td>{{$task->priority}}</td>
                                     <td>{{$task->project->name}}</td>
                                     <td>
-                                        <button class="btn btn-info btn-sm task" task="{{$task->id}}">
+                                        <button type="button" class="btn btn-info btn-sm task" task="{{$task->id}}">
                                             <i class="fa fa-eye"></i>
                                         </button>
                                     </td>
@@ -81,7 +89,7 @@
                     </div>
                     @endif
                     <div>
-                        {{$dayTasks->render()}}
+                        {{$dayTasks->appends($request->only(['id', 'name', 'type', 'priority', 'project', 'filter']))->render()}}
                     </div>
                 </div>
             </div>

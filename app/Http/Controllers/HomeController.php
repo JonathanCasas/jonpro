@@ -43,6 +43,7 @@ class HomeController extends Controller {
         $priorities = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'priority');
         $types = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'type');
         return view('home')
+                        ->with('request', $request)
                         ->with('tasks', $tasks)
                         ->with('dayTasks', $dayTasks)
                         ->with('states', $states)
