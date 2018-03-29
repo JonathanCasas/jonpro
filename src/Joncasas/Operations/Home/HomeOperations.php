@@ -27,13 +27,13 @@ trait HomeOperations {
                                 $query->where('name', 'like', "%{$request->get('name')}%");
                             }
                             if ($request->has('type') && !is_null($request->get('type'))) {
-                                $query->where('type', 'like', "%{$request->get('name')}%");
+                                $query->where('type', 'like', "%{$request->get('type')}%");
                             }
                             if ($request->has('priority') && !is_null($request->get('priority'))) {
                                 $query->where('priority', 'like', "%{$request->get('priority')}%");
                             }
-                            if ($request->has('proyect') && !is_null($request->get('priority'))) {
-                                $query->where('projects_id', '=', $request->get('proyect'));
+                            if ($request->has('project') && !is_null($request->get('project'))) {
+                                $query->where('projects_id', '=', $request->get('project'));
                             }
                             return $query;
                         })->paginate(10);
