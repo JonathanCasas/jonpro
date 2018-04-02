@@ -51,12 +51,28 @@ class HomeController extends Controller {
                         ->with('types', $types);
     }
 
-    public function allTasks() {
-        $tasks = \App\Models\Task::where('assigned_to', '=', auth()->user()->id)
-                ->whereIn('state', ['Open', 'Waiting', 'New'])
-                ->orderBy('start_date', 'asc')
-                ->paginate(10, ['*'], 'all');
-        return view('tasks')->with('tasks', $tasks);
+    /**
+     * Show tasks
+     * @param Request $request
+     */
+    public function allTasks(Request $request) {
+        $states = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'state');
+        $priorities = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'priority');
+        $types = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'type');
+        if ($request->has('filter')) {
+            $tasks = $this->getQuerySearchTwo($request);
+        } else {
+            $tasks = \App\Models\Task::where('assigned_to', '=', auth()->user()->id)
+                    ->whereIn('state', ['Open', 'Waiting', 'New'])
+                    ->orderBy('start_date', 'asc')
+                    ->paginate(10, ['*'], 'all');
+        }
+        return view('tasks')
+                        ->with('request', $request)
+                        ->with('tasks', $tasks)
+                        ->with('states', $states)
+                        ->with('priorities', $priorities)
+                        ->with('types', $types);
     }
 
 }
