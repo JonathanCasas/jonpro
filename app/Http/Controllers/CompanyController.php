@@ -15,9 +15,15 @@ class CompanyController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $companies = Company::paginate(10);
-        return view('companies.index')->with('companies', $companies);
+    public function index(Request $request) {
+        if ($request->has('filter')) {
+            $companies = $this->getQuerySearch($request);
+        } else {
+            $companies = Company::paginate(10);
+        }
+        return view('companies.index')
+                        ->with('request', $request)
+                        ->with('companies', $companies);
     }
 
     /**

@@ -23,43 +23,64 @@
             </div>
             <div class="x_content">
                 <div class="body table-responsive">
-
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>#</th>
-                                <th>Name</th>
-                                <th>Nit</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if($companies->isNotEmpty())
-                            @foreach($companies as $company)
-                            <tr>
-                                <th scope="row">{{$company->id}}</th>
-                                <td>{{$company->name}}</td>
-                                <td>{{$company->nit}}</td>
-                                <td>
-                                    <a href="{{route('companies.edit',['company'=>$company])}}" class="btn btn-warning btn-sm">
-                                        <i class="fa fa-pencil"></i>
-                                    </a>
-                                    <a href="{{route('companies.show',['company'=>$company])}}" type="button" class="btn btn-info btn-sm">
-                                        <i class="fa fa-eye"></i>
-                                    </a>
-                                </td>
-                            </tr>
-                            @endforeach
-                            @endif
-                        </tbody>
-                    </table>
+                    <form action="{{route('companies.index')}}" method="GET">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Name</th>
+                                    <th>Nit</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <input type="hidden" name="filter" value="true">
+                                        <input type="text" name="id" value="{{$request->get('id')}}" class="form-control">
+                                    </th>
+                                    <th>
+                                        <input type="text" name="name" value="{{$request->get('name')}}" class=" form-control">
+                                    </th>
+                                    <th>
+                                        <input type="text" name="nit" value="{{$request->get('nit')}}" class="form-control">
+                                    </th>
+                                    <th>
+                                        <button type="submit" class="btn btn-dark btn-sm">
+                                            <i class="fa fa-filter"></i>
+                                        </button>
+                                        <a href="{{route('companies.index')}}" class="btn btn-danger">
+                                            <i class="fa fa-remove"></i>
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if($companies->isNotEmpty())
+                                @foreach($companies as $company)
+                                <tr>
+                                    <th scope="row">{{$company->id}}</th>
+                                    <td>{{$company->name}}</td>
+                                    <td>{{$company->nit}}</td>
+                                    <td>
+                                        <a href="{{route('companies.edit',['company'=>$company])}}" class="btn btn-warning btn-sm">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                        <a href="{{route('companies.show',['company'=>$company])}}" type="button" class="btn btn-info btn-sm">
+                                            <i class="fa fa-eye"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                                @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </form>
                     @if($companies->isEmpty())
                     <div>
                         No results found
                     </div>
                     @endif
                     <div>
-                        {{$companies->render()}}
+                        {{$companies->appends($request->all())->render()}}
                     </div>
                 </div>
             </div>

@@ -36,4 +36,22 @@ trait CompanyOperations {
         }
     }
 
+    /**
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Pagination\Paginator
+     */
+    protected function getQuerySearch(\Illuminate\Http\Request $request) {
+        $query = \App\Models\Company::select();
+        if ($request->has('id') && !is_null($request->get('id'))) {
+            $query->where('id', 'like', "%{$request->get('id')}%");
+        }
+        if ($request->has('name') && !is_null($request->get('name'))) {
+            $query->where('name', 'like', "%{$request->get('name')}%");
+        }
+        if ($request->has('nit') && !is_null($request->get('nit'))) {
+            $query->where('nit', 'like', "%{$request->get('nit')}%");
+        }
+        return $query->paginate(10);
+    }
+
 }
