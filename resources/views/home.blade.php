@@ -154,7 +154,7 @@
 <div class="modal fade" id="update_task" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form action="" method="POST" >
+            <form action="{{route('tasks.aux.update')}}" method="POST" >
                 <div class="modal-header">
                     <h4 class="modal-title" id="largeModalLabel">View Task</h4>
                 </div>
@@ -166,7 +166,7 @@
                             <div class="form-group">
                                 <b>Name</b>
                                 <div class="form-line">
-                                    <input type="text" id="txt-name" class="form-control" name="name" required="" disabled="" readonly="">
+                                    <input type="text" id="txt-name" class="form-control" name="name" required="" readonly="">
                                 </div>
                             </div>
                         </div>
@@ -174,7 +174,7 @@
                             <div class="form-group">
                                 <b>Type</b>
                                 <div class="form-line">
-                                    <select name="type" id="sl-type" class="form-control jonpro-select" required="" disabled="" readonly="">
+                                    <select name="type" id="sl-type" class="form-control jonpro-select" required="" readonly="">
                                         <option value="">-- Select --</option>
                                         @foreach($types as $type)
                                         <option value="{{$type}}">{{$type}}</option>
@@ -189,7 +189,7 @@
                             <div class="form-group">
                                 <b>State</b>
                                 <div class="form-line">
-                                    <select name="state" id="sl-state" class="form-control jonpro-select" required="" disabled="" readonly="">
+                                    <select name="state" id="sl-state" class="form-control jonpro-select" required="">
                                         <option value="">-- Select --</option>
                                         @foreach($states as $state)
                                         <option value="{{$state}}">{{$state}}</option>
@@ -202,7 +202,7 @@
                             <div class="form-group">
                                 <b>Priority</b>
                                 <div class="form-line">
-                                    <select name="priority" id="sl-priority" class="form-control jonpro-select" required="" disabled="" readonly="">
+                                    <select name="priority" id="sl-priority" class="form-control jonpro-select" required="" readonly="">
                                         <option value="">-- Select --</option>
                                         @foreach($priorities as $priority)
                                         <option value="{{$priority}}">{{$priority}}</option>
@@ -217,7 +217,7 @@
                             <div class="form-group">
                                 <b>Assigned To</b>
                                 <div class="form-line">
-                                    <select name="assigned_to" id="sl-assigned_to" class="form-control users" required="" disabled="" readonly="">
+                                    <select name="assigned_to" id="sl-assigned_to" class="form-control users" required="" readonly="">
 
                                     </select>
                                 </div>
@@ -227,7 +227,7 @@
                             <div class="form-group">
                                 <b>Estimated time</b>
                                 <div class="form-line">
-                                    <input type="text" disabled="" readonly="" class="form-control" id="txt-estimated_time" name="estimated_time">
+                                    <input type="text" readonly="" class="form-control" id="txt-estimated_time" name="estimated_time">
                                 </div>
                             </div>
                         </div>
@@ -237,7 +237,7 @@
                             <div class="form-group">
                                 <b>Start Date</b>
                                 <div class="form-line">
-                                    <input type="text" disabled="" readonly="" class="form-control date" id="txt-start_date" name="start_date">
+                                    <input type="text" readonly="" class="form-control date" id="txt-start_date" name="start_date">
                                 </div>
                             </div>
                         </div>
@@ -245,7 +245,7 @@
                             <div class="form-group">
                                 <b>End Date</b>
                                 <div class="form-line">
-                                    <input type="text" disabled="" readonly="" class="form-control date" id="txt-end_date" name="end_date">
+                                    <input type="text" class="form-control date" id="txt-end_date" name="end_date">
                                 </div>
                             </div>
                         </div>
@@ -255,13 +255,14 @@
                             <div class="form-group">
                                 <b>Commets</b>
                                 <div class="form-line">
-                                    <textarea id="tinymce" disabled="" readonly="" name="comments"></textarea>
+                                    <textarea id="tinymce" name="comments"></textarea>
                                 </div>
                             </div>
                         </div> 
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">SAVE</button>
                     <button type="button" class="btn btn-link waves-effect" data-dismiss="modal">CLOSE</button>
                 </div>
             </form>

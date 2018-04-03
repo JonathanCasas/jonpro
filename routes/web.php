@@ -42,6 +42,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::group(['prefix' => 'tasks'], function() {
         Route::post('/ajax/get', 'TaskController@getAjaxTask')->name('tasks.ajax.get');
         Route::get('/', 'HomeController@allTasks')->name('home.alltasks');
+        Route::post('/update', 'TaskController@update')->name('tasks.aux.update');
     });
 
     Route::get('settings', 'SettingsController@create')->name('settings.create');

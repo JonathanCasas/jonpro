@@ -17,44 +17,98 @@ Tasks &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success w" data-tog
     </div>
 </div>
 <div class="body table-responsive">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Name</th>
-                <th>Type</th>
-                <th>State</th>
-                <th>Priority</th>
-                <th>Assigned To</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Estiated time</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if($tasks->isNotEmpty())
-            @foreach($tasks as $task)
-            <tr>
-                <th class="row">{{$task->id}}</th>
-                <td>{{$task->name}}</td>
-                <td>{{$task->type}}</td>
-                <td>{{$task->state}}</td>
-                <td>{{$task->priority}}</td>
-                <td>{{$task->assigned->name}}</td>
-                <td>{{!is_null($task->start_date)?$task->start_date->format('Y-m-d'):''}}</td>
-                <td>{{!is_null($task->end_date)?$task->end_date->format('Y-m-d'):''}}</td>
-                <td>{{$task->estimated_time}}</td>
-                <td>
-                    <button class="btn btn-info btn-sm task" task="{{$task->id}}">
-                        <i class="fa fa-pencil"></i>
-                    </button>
-                </td>
-            </tr>
-            @endforeach
-            @endif
-        </tbody>
-    </table>
+    <form action="{{route('projects.show',['project'=>$project])}}" method="GET">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>State</th>
+                    <th>Priority</th>
+                    <th>Assigned To</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Estiated time</th>
+                    <th>Action</th>
+                </tr>
+                <tr>
+                    <th>
+                        <input type="hidden" name="filter" value="true">
+                        <input type="text" name="id" value="{{$request->get('id')}}" class="form-control" style="width: 4em">
+                    </th>
+                    <th><input type="text" name="name" value="{{$request->get('name')}}" class="form-control"></th>
+                    <th>
+                        <select name="type" class="form-control jonpro-select">
+                            <option value="">-- Select --</option>
+                            @foreach($types as $type)
+                            <option value="{{$type}}" {{$type==$request->get('type')?'selected':''}}>{{$type}}</option>
+                            @endforeach
+                        </select>
+                    </th>
+                    <th>
+                        <select class="form-control jonpro-select" name="state">
+                            <option value="">-- Select --</option>
+                            @foreach($states as $state)
+                            <option value="{{$state}}">{{$state}}</option>
+                            @endforeach
+                        </select>
+                    </th>
+                    <th>
+                        <select name="priority" class="form-control jonpro-select">
+                            <option value="">-- Select --</option>
+                            @foreach($priorities as $priority)
+                            <option value="{{$priority}}" {{$priority==$request->get('priority')?'selected':''}}>{{$priority}}</option>
+                            @endforeach
+                        </select>
+                    </th>
+                    <th>
+                        @php
+                        $user=\App\User::find($request->get('assigned_to'));
+                        @endphp
+                        <select name="assigned_to" class="form-control users">
+                            @if(!is_null($user))
+                            <option value="{{$user->id}}" selected="">{{$user->name}}</option>
+                            @endif
+                        </select>
+                    </th>
+                    <th><input type="text" name="start_date" value="{{$request->get('start_date')}}" placeholder="yyyy-mm-dd" class="form-control date"></th>
+                    <th><input type="text" name="end_date" value="{{$request->get('end_date')}}" placeholder="yyyy-mm-dd" class="form-control date"></th>
+                    <th><input type="text" name="estimated_time" value="{{$request->get('estimated_time')}}" class="form-control" style="width: 4em"></th>
+                    <th>
+                        <button type="submit" name="filter" value="true" class="btn btn-dark btn-sm">
+                            <i class="fa fa-filter"></i>
+                        </button>
+                        <a class="btn btn-danger btn-sm" href="{{route('projects.show',['project'=>$project])}}">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if($tasks->isNotEmpty())
+                @foreach($tasks as $task)
+                <tr>
+                    <th class="row">{{$task->id}}</th>
+                    <td>{{$task->name}}</td>
+                    <td>{{$task->type}}</td>
+                    <td>{{$task->state}}</td>
+                    <td>{{$task->priority}}</td>
+                    <td>{{$task->assigned->name}}</td>
+                    <td>{{!is_null($task->start_date)?$task->start_date->format('Y-m-d'):''}}</td>
+                    <td>{{!is_null($task->end_date)?$task->end_date->format('Y-m-d'):''}}</td>
+                    <td>{{$task->estimated_time}}</td>
+                    <td>
+                        <button class="btn btn-info btn-sm task" task="{{$task->id}}">
+                            <i class="fa fa-pencil"></i>
+                        </button>
+                    </td>
+                </tr>
+                @endforeach
+                @endif
+            </tbody>
+        </table>
+    </form>
     @if($tasks->isEmpty())
     <div>
         No results found
@@ -332,7 +386,7 @@ $(document).ready(function () {
     $('.jonpro-select').select2({
         width: '100%'
     });
-    $jp('.users').users("{{route('users.ajax.select2')}}");
+    $jp('.users').users("{{route('users.ajax.select2')}}", "Search Users");
     $('.task').click(function () {
         var task = $(this).attr('task');
         $.ajax({

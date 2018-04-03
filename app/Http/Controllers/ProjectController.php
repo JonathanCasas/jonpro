@@ -71,10 +71,15 @@ class ProjectController extends Controller {
      * Display the specified resource.
      *
      * @param  \App\Models\Project  $project
+     * @param Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show(Project $project) {
-        $tasks = $project->tasks()->orderBy('created_at', 'desc')->paginate(10);
+    public function show(Project $project, Request $request) {
+        if ($request->has('filter')) {
+            $tasks = $this->getQuerySearchTasks($request, $project);
+        } else {
+            $tasks = $project->tasks()->orderBy('created_at', 'desc')->paginate(10);
+        }
         $states = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'state');
         $priorities = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'priority');
         $types = \Joncasas\Operations\DatabaseHelpers::getEnumValues('tasks', 'type');
@@ -83,7 +88,8 @@ class ProjectController extends Controller {
                         ->with('tasks', $tasks)
                         ->with('states', $states)
                         ->with('priorities', $priorities)
-                        ->with('types', $types);
+                        ->with('types', $types)
+                        ->with('request', $request);
     }
 
     /**
