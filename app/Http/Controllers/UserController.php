@@ -15,10 +15,15 @@ class UserController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $users = User::paginate(10);
+    public function index(Request $request) {
+        if ($request->has('filter')) {
+            $users = $this->getQuerySearch($request);
+        } else {
+            $users = User::paginate(10);
+        }
         return view('users.index')
-                        ->with('users', $users);
+                        ->with('users', $users)
+                        ->with('request', $request);
     }
 
     /**

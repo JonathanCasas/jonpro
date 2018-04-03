@@ -7,7 +7,7 @@
 
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-
+        <link href="/favicon.ico" rel="{{asset('jonpro/jonpro-icon.png')}}" />
         <title>{{Jonpro::getSiteName()}}</title>
 
         <!-- Styles -->

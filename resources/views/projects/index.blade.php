@@ -77,9 +77,9 @@
                                         <button class="btn btn-dark btn-sm" type="submit">
                                             <i class="fa fa-filter"></i>
                                         </button>
-                                        <button class="btn btn-danger btn-sm reset" type="button">
+                                        <a class="btn btn-danger btn-sm" href="{{route('projects.index')}}">
                                             <i class="fa fa-dashcube"></i>
-                                        </button>
+                                        </a>
                                     </th>
                                 </tr>
                             </thead>
