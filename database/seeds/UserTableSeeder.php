@@ -12,8 +12,8 @@ class UserTableSeeder extends Seeder {
     public function run() {
         $user = new App\User();
         $user->name = 'Jonathan Casas';
-        $user->email = 'joncasasq@gmail.com';
-        $user->password = bcrypt('Prueba2018*');
+        $user->email = 'test@test.com';
+        $user->password = bcrypt('test');
         $user->save();
     }
 
