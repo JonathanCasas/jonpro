@@ -15,9 +15,23 @@ class ProjectController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
-        $projects = Project::paginate(10);
-        return view('projects.index', ['projects' => $projects]);
+    public function index(Request $request) {
+        $company = \App\Models\Company::find($request->get('company'));
+        $createdBy = \App\User::find($request->get('created_by'));
+        if ($request->has('filter')) {
+            $projects = $this->getQuerySearch($request);
+        } else {
+            $projects = Project::paginate(10);
+        }
+        $states = \Joncasas\Operations\DatabaseHelpers::getEnumValues('projects', 'state');
+        $priorities = \Joncasas\Operations\DatabaseHelpers::getEnumValues('projects', 'priority');
+        return view('projects.index')
+                        ->with('projects', $projects)
+                        ->with('request', $request)
+                        ->with('states', $states)
+                        ->with('priorities', $priorities)
+                        ->with('company', $company)
+                        ->with('createdBy', $createdBy);
     }
 
     /**

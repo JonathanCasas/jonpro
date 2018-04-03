@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-success waves-effect">
-                        <i class="fa fa-save">save</i>
+                        <i class="fa fa-save"></i>
                         SAVE
                     </button>
                 </form>

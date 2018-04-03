@@ -2,8 +2,8 @@ var jonpro = function (element) {
     this.companies = function (route) {
         this.select2(route);
     };
-    this.users = function (route) {
-        this.select2(route);
+    this.users = function (route, placeholder) {
+        this.select2(route, placeholder);
     };
     this.select2 = function (route, placeholder) {
         $(element).select2({
