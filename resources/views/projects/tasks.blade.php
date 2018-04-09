@@ -99,7 +99,7 @@ Tasks &nbsp;&nbsp;&nbsp;<button type="button" class="btn btn-success w" data-tog
                     <td>{{!is_null($task->end_date)?$task->end_date->format('Y-m-d'):''}}</td>
                     <td>{{$task->estimated_time}}</td>
                     <td>
-                        <button class="btn btn-info btn-sm task" task="{{$task->id}}">
+                        <button type="button" class="btn btn-info btn-sm task" task="{{$task->id}}">
                             <i class="fa fa-pencil"></i>
                         </button>
                     </td>
