@@ -71,7 +71,7 @@
                                     <td>{{$task->name}}</td>
                                     <td>{{$task->type}}</td>
                                     <td>{{$task->priority}}</td>
-                                    <td>{{$task->project->name}}</td>
+                                    <td><a href="{{route('projects.show',['project'=>$task->project])}}">{{$task->project->name}}</a></td>
                                     <td>
                                         <button type="button" class="btn btn-info btn-sm task" task="{{$task->id}}">
                                             <i class="fa fa-eye"></i>
