@@ -33,7 +33,7 @@
                     <div class="menu_section">
                         <h3>General</h3>
                         <ul class="nav side-menu">
-                            <li class="{{isActiveRoute('home')}}{{isActiveRoute('home2')}}"><a href="{{route('home')}}"><i class="fa fa-home"></i> {{__('layout.home')}}</a></li>
+                            <li class="{{isActiveRoute('home')}}{{isActiveRoute('home2')}}{{ isActiveRoute('home.*') }}"><a href="{{route('home')}}"><i class="fa fa-home"></i> {{__('layout.home')}}</a></li>
                             <li class="{{isActiveRoute('projects.*')}}"><a href="{{route('projects.index')}}"><i class="fa fa-folder"></i> {{__('layout.projects')}}</a></li>
                             <li class="{{isActiveRoute('users.*')}}"><a href="{{route('users.index')}}"><i class="fa fa-users"></i> {{__('layout.users')}}</a></li>
                             <li class="{{isActiveRoute('companies.*')}}"><a href="{{route('companies.index')}}"><i class="fa fa-institution"></i> {{__('layout.companies')}}</a></li>
