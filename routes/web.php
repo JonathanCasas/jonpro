@@ -48,3 +48,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::get('settings', 'SettingsController@create')->name('settings.create');
     Route::post('settings', 'SettingsController@store')->name('settings.store');
 });
+Route::get('install', function () {
+    Artisan::call('migrate:refresh');
+    Artisan::call('db:seed');
+});
